@@ -32,7 +32,7 @@ General steps:
 on ws:
 
 ```bash
-bob@desktop:~/isaac$  ./engine/build/deploy.sh --remote-user ROBOTUSER -p //apps/samples/stereo_dummy:stereo_dummy-pkg -d jetpack42 -h ROBOTIP
+bob@desktop:~/isaac$  ./engine/build/deploy.sh --remote_user ROBOTUSER -p //apps/samples/stereo_dummy:stereo_dummy-pkg -d jetpack42 -h ROBOTIP
 ```
 
 to run:
@@ -46,3 +46,11 @@ cd ~/deploy/boliu/stereo_dummy-pkg # paths are relative in Issac
 
 on ws: open browser and enter: ROBOTIP:3000/
 
+# increase compute power
+Use the `jetson_clocks.sh` Script
+* If you encounter a large amount of motion blur, run `/home/nvidia/jetson_clocks.sh`. That script enables all cores, disables CPU idling, disables the GPU rail gate, and turns the fan speed to max (where a fan is installed.) Those changes may alleviate the blur.
+* These settings do not persist over reboot.
+
+Setting the Power Model
+* Running `sudo nvpmodel -m 0` enables all cores, and increases the scaling minimum clock frequency. This change persists over reboot. 
+* Run `sudo nvpmodel -q` to display current settings. 
